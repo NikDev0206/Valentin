@@ -24,8 +24,9 @@ noBtn.addEventListener('click', (e) => {
 
 // 3. ÉCOUTEUR POUR LE BOUTON OUI
 yesBtn.addEventListener('click', () => {
-    question.innerHTML = "Génial ! Je t'aime ! 😘";
+    question.innerHTML = "Je savais que tu allais dire, ouiiii ! Je t'aime mi toala ! 🐨🤩";
     noBtn.style.display = 'none';
     yesBtn.style.transform = 'scale(1.5)';
     createHearts();
 });
+
