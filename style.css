@@ -1,0 +1,57 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  /* Optimisé pour iPhone  background-color: #ffe4e1; */
+    background: url('notre-photo.jpeg');
+    font-family: 'Arial', sans-serif;
+    overflow: hidden; /* Empêche de scroller pendant l'animation */
+    
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    z-index: 10;
+    width: 80%;
+    max-width: 400px;
+}
+
+h1 { color: #d63384; font-size: 1.5rem; }
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+button {
+    padding: 15px 25px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    touch-action: manipulation; /* Optimisé pour iPhone */
+}
+
+#yesBtn { background-color: #ff4d6d; color: white; }
+#noBtn { background-color: #adb5bd; color: white; position: relative; }
+
+/* Style pour les cœurs qui tombent */
+.heart {
+    position: absolute;
+    color: #ff4d6d;
+    font-size: 1.5rem;
+    animation: fall linear infinite;
+    top: -10%;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh); }
+}
