@@ -1,39 +1,31 @@
-const noBtn = document.getElementById('noBtn');
-const yesBtn = document.getElementById('yesBtn');
-const question = document.getElementById('question');
-const heartContainer = document.getElementById('heart-container');
-
-// 1. Faire fuir le bouton "Non" (marche aussi au toucher sur iPhone)
-const moveButton = () => {
+// 1. On garde la fonction de mouvement
+const moveButton = (e) => {
+    e.preventDefault(); // Bloque le clic fantôme
+    e.stopPropagation(); // Empêche l'événement de se propager
+    
     const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
     const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-    noBtn.style.position = 'absolute';
+    
+    noBtn.style.position = 'fixed'; 
     noBtn.style.left = `${x}px`;
     noBtn.style.top = `${y}px`;
 };
 
+// 2. ÉCOUTEURS POUR LE BOUTON NON
+// On utilise 'touchstart' pour mobile et 'mouseover' pour PC
+noBtn.addEventListener('touchstart', moveButton, {passive: false});
 noBtn.addEventListener('mouseover', moveButton);
-noBtn.addEventListener('touchstart', moveButton); // Pour mobile
 
-// 2. Action quand elle clique sur "Oui"
-yesBtn.addEventListener('click', () => {
-    question.innerHTML = "Je savais que tu allais dire, ouiiii ! Je t'aime mi toala ! 🐨🤩";
-    noBtn.style.display = 'none';
-    yesBtn.style.transform = 'scale(1.5)';
-    createHearts(); // Lance la pluie de cœurs
+// TRÈS IMPORTANT : On bloque explicitement le clic sur le bouton "Non"
+// pour éviter qu'il ne déclenche le succès par erreur
+noBtn.addEventListener('click', (e) => {
+    e.preventDefault();
 });
 
-// 3. Création de la pluie de cœurs
-function createHearts() {
-    setInterval(() => {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.innerHTML = '❤️';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = Math.random() * 2 + 3 + 's';
-        heartContainer.appendChild(heart);
-        
-        // Supprimer le cœur après l'animation pour ne pas ralentir le téléphone
-        setTimeout(() => { heart.remove(); }, 5000);
-    }, 300);
-}
+// 3. ÉCOUTEUR POUR LE BOUTON OUI
+yesBtn.addEventListener('click', () => {
+    question.innerHTML = "Génial ! Je t'aime ! 😘";
+    noBtn.style.display = 'none';
+    yesBtn.style.transform = 'scale(1.5)';
+    createHearts();
+});
